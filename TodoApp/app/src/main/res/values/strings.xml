@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TodoApp</string>
+    <string name="title_activity_todo_detail">TodoDetailActivity</string>
+    <string name="menu_item_create">create</string>
+    <string name="add_new_task">add new task</string>
+    <string name="et_placeholder_title">title</string>
+    <string name="et_placeholder_description">description</string>
+</resources>
