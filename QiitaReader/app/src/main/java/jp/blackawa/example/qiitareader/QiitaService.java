@@ -8,10 +8,9 @@ import retrofit2.http.GET;
 import retrofit2.http.Query;
 
 public interface QiitaService {
-    @GET("/items")
+    @GET("items")
     Call<List<PostEntity>> listItems(
-            @Query("page") String page,
-            @Query("per_page") String perPage,
-            @Query("query") String query
+            @Query("page") int page,
+            @Query("per_page") int perPage
     );
 }
