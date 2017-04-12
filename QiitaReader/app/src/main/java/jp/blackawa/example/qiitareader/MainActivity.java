@@ -35,47 +35,37 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new PostAdapter();
         mPostRecyclerView.setAdapter(mAdapter);
 
-        new QiitaPostsTask().execute();
+        fetchQiitaItems();
     }
 
     private void updateRecyclerView(List<Post> posts) {
         mAdapter.setPosts(posts);
     }
 
-    private class QiitaPostsTask extends AsyncTask<String, Void, List<Post>> {
+    private void fetchQiitaItems() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://qiita.com/api/v2/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        @Override
-        protected List<Post> doInBackground(String... params) {
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("https://qiita.com/api/v2/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
+        QiitaService service = retrofit.create(QiitaService.class);
+        Call<List<PostEntity>> call = service.listItems(1, 20);
 
-            QiitaService service = retrofit.create(QiitaService.class);
-            Call<List<PostEntity>> call = service.listItems(1, 20);
-
-            final List<Post> posts = new ArrayList<>();
-            call.enqueue(new Callback<List<PostEntity>>() {
-                @Override
-                public void onResponse(Call<List<PostEntity>> call, Response<List<PostEntity>> response) {
-                    Log.d(this.getClass().getSimpleName(), "レスポンスを受け取りました. " + response.body().toString());
-                    for (PostEntity post : response.body()) {
-                        posts.add(new Post(post.getTitle(), post.getUser().getName(), post.getCreatedAt()));
-                    }
+        call.enqueue(new Callback<List<PostEntity>>() {
+            @Override
+            public void onResponse(Call<List<PostEntity>> call, Response<List<PostEntity>> response) {
+                Log.d(this.getClass().getSimpleName(), "レスポンスを受け取りました. " + response.body().toString());
+                List<Post> posts = new ArrayList<>();
+                for (PostEntity post : response.body()) {
+                    posts.add(new Post(post.getTitle(), post.getUser().getName(), post.getCreatedAt()));
                 }
+                updateRecyclerView(posts);
+            }
 
-                @Override
-                public void onFailure(Call<List<PostEntity>> call, Throwable t) {
-                    Log.e(this.getClass().getSimpleName(), "HTTPリエクストでエラーが発生しました. " + t.getClass().getSimpleName() + ": " + t.getMessage());
-                }
-            });
-
-            return posts;
-        }
-
-        @Override
-        protected void onPostExecute(List<Post> posts) {
-            updateRecyclerView(posts);
-        }
+            @Override
+            public void onFailure(Call<List<PostEntity>> call, Throwable t) {
+                Log.e(this.getClass().getSimpleName(), "HTTPリエクストでエラーが発生しました. " + t.getClass().getSimpleName() + ": " + t.getMessage());
+            }
+        });
     }
 }
