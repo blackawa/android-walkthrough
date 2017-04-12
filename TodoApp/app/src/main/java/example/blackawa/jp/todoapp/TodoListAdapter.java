@@ -1,6 +1,7 @@
 package example.blackawa.jp.todoapp;
 
 import android.content.Context;
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import example.blackawa.jp.todoapp.databinding.TodoListItemBinding;
 import example.blackawa.jp.todoapp.model.Todo;
 
 public class TodoListAdapter extends ArrayAdapter<Todo> {
@@ -27,13 +29,8 @@ public class TodoListAdapter extends ArrayAdapter<Todo> {
             );
         }
         Todo todo = getItem(position);
-        TextView title = (TextView) listView.findViewById(R.id.tv_todo_title);
-        title.setText(todo.getTitle());
-        TextView owner = (TextView) listView.findViewById(R.id.tv_owner);
-        owner.setText(todo.getOwner());
-        TextView deadLine = (TextView) listView.findViewById(R.id.tv_dead_line);
-        deadLine.setText(todo.getDeadLine());
-        return listView;
+        TodoListItemBinding binding = DataBindingUtil.bind(listView);
+        binding.setTodo(todo);
+        return binding.getRoot();
     }
 }
-
