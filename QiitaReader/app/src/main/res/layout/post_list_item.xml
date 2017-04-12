@@ -1,32 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="8dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/post_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="ClojureScript x XhrIo x 非同期通信 でバイナリファイルをダウンロード" />
+    <data>
+
+        <variable
+            name="post"
+            type="jp.blackawa.example.qiitareader.data.Post" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="5dp">
+        android:orientation="vertical"
+        android:padding="8dp">
+
         <TextView
-            android:id="@+id/username"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:text="blackawa" />
-        <TextView
-            android:id="@+id/post_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="2017/04/07 12:34:56.0" />
+            android:text="@{post.title}"
+            tools:text="ClojureScript x XhrIo x 非同期通信 でバイナリファイルをダウンロード" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@{post.username}"
+                tools:text="blackawa" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{post.createdAt}"
+                tools:text="2017/04/07 12:34:56.0" />
+        </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</layout>
