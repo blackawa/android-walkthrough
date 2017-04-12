@@ -4,19 +4,25 @@
     android:id="@+id/activity_todo_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="example.blackawa.jp.todoapp.TodoListActivity"
-    android:orientation="vertical">
-
-    <ListView
-        android:id="@+id/lv_todos"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/todo_list_item" />
+    android:orientation="vertical"
+    tools:context="example.blackawa.jp.todoapp.TodoListActivity">
 
     <Button
         android:id="@+id/bt_new_task"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/add_new_task"
-        android:onClick="onClickNewTaskButton"/>
+        android:onClick="onClickNewTaskButton"
+        android:text="@string/add_new_task" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/lv_todos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/todo_list_item" />
+    </ScrollView>
+
 </LinearLayout>

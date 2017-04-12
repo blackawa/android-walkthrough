@@ -3,11 +3,12 @@ package example.blackawa.jp.todoapp;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,8 +18,7 @@ import example.blackawa.jp.todoapp.repository.TodoContract;
 
 public class TodoListActivity extends AppCompatActivity {
 
-
-    private ListView mTodoListView;
+    private RecyclerView mTodoRecyclerView;
     private TodoDbHelper mDbHelper;
 
     @Override
@@ -26,11 +26,12 @@ public class TodoListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_todo_list);
 
-        mTodoListView = (ListView) findViewById(R.id.lv_todos);
+        mTodoRecyclerView = (RecyclerView) findViewById(R.id.lv_todos);
         mDbHelper = new TodoDbHelper(this);
 
-        TodoListAdapter adapter = new TodoListAdapter(TodoListActivity.this, fetchTodo());
-        mTodoListView.setAdapter(adapter);
+        TodoListAdapter adapter = new TodoListAdapter(fetchTodo());
+        mTodoRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mTodoRecyclerView.setAdapter(adapter);
 
         Button newTaskButton = (Button) findViewById(R.id.bt_new_task);
         newTaskButton.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +74,8 @@ public class TodoListActivity extends AppCompatActivity {
                     )
             );
         }
+
+        cursor.close();
 
         return todos;
     }
