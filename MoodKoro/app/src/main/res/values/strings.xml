@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MoodKoro</string>
+    <string name="menu_item_add">ADD</string>
 </resources>
