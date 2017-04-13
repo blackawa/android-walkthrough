@@ -2,6 +2,7 @@ package jp.blackawa.moodkoro.domain
 
 import jp.blackawa.moodkoro.entity.MoodEntity
 
-class Mood(val id: Int, val solution: String) {
-    constructor(entity: MoodEntity) : this(entity.id, entity.solution)
+class Mood(entity: MoodEntity) {
+    val id: Int = entity.id
+    val solution: String = entity.solution
 }
