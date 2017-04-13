@@ -3,11 +3,15 @@ package jp.blackawa.moodkoro
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
+import android.view.View
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import jp.blackawa.moodkoro.databinding.ActivityMoodBinding
+import jp.blackawa.moodkoro.entity.MoodEntity
+import jp.blackawa.moodkoro.entity.OrmaDatabase
 
 class MoodActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMoodBinding
@@ -17,12 +21,7 @@ class MoodActivity : AppCompatActivity() {
         setContentView(R.layout.activity_mood)
         binding = DataBindingUtil.setContentView<ActivityMoodBinding>(this, R.layout.activity_mood)
 
-        binding.buttonSaveMood.setOnClickListener {
-            val solution: String = binding.editTextSolution.text.toString()
-            Log.d(this.javaClass.simpleName, "save button clicked.")
-            Toast.makeText(this, "EditText is \"${solution}\"", Toast.LENGTH_LONG).show()
-            finish()
-        }
+        binding.buttonSaveMood.setOnClickListener(onSaveButtonClick)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -38,5 +37,16 @@ class MoodActivity : AppCompatActivity() {
             }
             else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    private val onSaveButtonClick = fun(v: View) {
+        val solution = binding.editTextSolution.text.toString()
+        val db: OrmaDatabase = OrmaDatabase.builder(this).build()
+        db.insertIntoMoodEntity(MoodEntity(solution = solution))
+        db.relationOfMoodEntity().inserter()
+                .executeAsSingle(MoodEntity(solution = solution))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe { a, b -> finish() }
     }
 }
