@@ -1,10 +1,12 @@
 package jp.blackawa.moodkoro
 
 import android.databinding.DataBindingUtil
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-
+import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import jp.blackawa.moodkoro.adapter.HistoryListItemAdapter
 import jp.blackawa.moodkoro.databinding.ActivityHistoryBinding
+import jp.blackawa.moodkoro.service.MoodService
 
 class HistoryActivity : AppCompatActivity() {
 
@@ -13,6 +15,7 @@ class HistoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_history)
 
         val binding = DataBindingUtil.setContentView<ActivityHistoryBinding>(this, R.layout.activity_history)
-        binding.greet = "Hello, world!"
+        binding.recyclerMoods.adapter = HistoryListItemAdapter(MoodService.fetchMoods())
+        binding.recyclerMoods.layoutManager = LinearLayoutManager(this)
     }
 }

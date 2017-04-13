@@ -1,6 +1,6 @@
 package jp.blackawa.moodkoro.entity
 
-data class Mood(
+data class MoodEntity(
         val id: Int,
         val solution: String
 )
