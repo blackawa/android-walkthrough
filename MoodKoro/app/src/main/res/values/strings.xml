@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MoodKoro</string>
     <string name="menu_item_add">ADD</string>
+    <string name="placeholder_solution">solution</string>
+    <string name="placeholder_save">save</string>
+    <string name="menu_item_cancel">CancelL</string>
 </resources>

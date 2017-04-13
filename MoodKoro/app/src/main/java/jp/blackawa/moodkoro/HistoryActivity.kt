@@ -1,12 +1,12 @@
 package jp.blackawa.moodkoro
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import jp.blackawa.moodkoro.adapter.HistoryListItemAdapter
 import jp.blackawa.moodkoro.databinding.ActivityHistoryBinding
 import jp.blackawa.moodkoro.service.MoodService
@@ -30,7 +30,7 @@ class HistoryActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_item_add -> {
-                Toast.makeText(this, "ADD button clicked", Toast.LENGTH_LONG).show()
+                startActivity(Intent(this, MoodActivity::class.java))
                 return true
             }
             else -> return super.onOptionsItemSelected(item)
