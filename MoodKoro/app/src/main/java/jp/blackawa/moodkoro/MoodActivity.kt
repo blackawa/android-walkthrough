@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import jp.blackawa.moodkoro.databinding.ActivityMoodBinding
@@ -39,14 +38,13 @@ class MoodActivity : AppCompatActivity() {
         }
     }
 
-    private val onSaveButtonClick = fun(v: View) {
+    private val onSaveButtonClick = fun(_: View) {
         val solution = binding.editTextSolution.text.toString()
         val db: OrmaDatabase = OrmaDatabase.builder(this).build()
-        db.insertIntoMoodEntity(MoodEntity(solution = solution))
-        db.relationOfMoodEntity().inserter()
-                .executeAsSingle(MoodEntity(solution = solution))
+        db.prepareInsertIntoMoodEntityAsSingle()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { a, b -> finish() }
+                .map { it.execute(MoodEntity(solution = solution)) }
+                .subscribe { _, _ -> finish() }
     }
 }
