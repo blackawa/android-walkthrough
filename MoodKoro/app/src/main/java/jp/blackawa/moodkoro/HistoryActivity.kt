@@ -5,21 +5,27 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import jp.blackawa.moodkoro.adapter.HistoryListItemAdapter
 import jp.blackawa.moodkoro.databinding.ActivityHistoryBinding
-import jp.blackawa.moodkoro.service.MoodService
+import jp.blackawa.moodkoro.domain.Mood
+import jp.blackawa.moodkoro.entity.OrmaDatabase
 
 class HistoryActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityHistoryBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_history)
 
-        val binding = DataBindingUtil.setContentView<ActivityHistoryBinding>(this, R.layout.activity_history)
-        binding.recyclerMoods.adapter = HistoryListItemAdapter(MoodService.fetchMoods())
+        binding = DataBindingUtil.setContentView<ActivityHistoryBinding>(this, R.layout.activity_history)
+        binding.recyclerMoods.adapter = HistoryListItemAdapter()
         binding.recyclerMoods.layoutManager = LinearLayoutManager(this)
+
+        updateHistoryList()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -35,5 +41,13 @@ class HistoryActivity : AppCompatActivity() {
             }
             else -> return super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun updateHistoryList() {
+        val db = OrmaDatabase.builder(this).build()
+        val moods: List<Mood> = db.selectFromMoodEntity()
+                .map { Mood(id = it.id, solution = it.solution) }
+        Log.d(this.javaClass.simpleName, moods.toString())
+        (binding.recyclerMoods.adapter as HistoryListItemAdapter).updateList(moods)
     }
 }
