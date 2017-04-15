@@ -24,8 +24,11 @@ class HistoryActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView<ActivityHistoryBinding>(this, R.layout.activity_history)
         binding.recyclerMoods.adapter = HistoryListItemAdapter()
         binding.recyclerMoods.layoutManager = LinearLayoutManager(this)
+    }
 
+    override fun onResume() {
         updateHistoryList()
+        super.onResume()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
