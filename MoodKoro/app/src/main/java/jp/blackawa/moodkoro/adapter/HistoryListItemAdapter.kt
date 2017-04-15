@@ -30,6 +30,8 @@ class HistoryListItemAdapter(private val context: Context, private var moods: Li
         notifyDataSetChanged()
     }
 
+    fun getItem(position: Int): Mood = moods[position]
+
     inner class VH(v: View) : RecyclerView.ViewHolder(v) {
         val binding: ListItemHistoryBinding = DataBindingUtil.bind<ListItemHistoryBinding>(v)
     }

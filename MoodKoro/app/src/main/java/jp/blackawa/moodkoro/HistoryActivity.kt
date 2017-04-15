@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -24,7 +25,10 @@ class HistoryActivity : AppCompatActivity() {
 
         binding = DataBindingUtil.setContentView<ActivityHistoryBinding>(this, R.layout.activity_history)
         binding.recyclerMoods.adapter = HistoryListItemAdapter(context = this, listener = View.OnClickListener {
-            startActivity(Intent(this, MoodEditActivity::class.java))
+            // FIXME: ウンコード
+            val mood: Mood = ((it.parent as RecyclerView).adapter as HistoryListItemAdapter).getItem(
+                    ((it.parent as RecyclerView).getChildLayoutPosition(it)))
+            startActivity(Intent(this, MoodEditActivity::class.java).putExtra("id", mood.id))
         })
         binding.recyclerMoods.layoutManager = LinearLayoutManager(this)
     }
