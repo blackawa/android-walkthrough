@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import jp.blackawa.moodkoro.adapter.HistoryListItemAdapter
 import jp.blackawa.moodkoro.databinding.ActivityHistoryBinding
 import jp.blackawa.moodkoro.domain.Mood
@@ -22,7 +23,9 @@ class HistoryActivity : AppCompatActivity() {
         setContentView(R.layout.activity_history)
 
         binding = DataBindingUtil.setContentView<ActivityHistoryBinding>(this, R.layout.activity_history)
-        binding.recyclerMoods.adapter = HistoryListItemAdapter()
+        binding.recyclerMoods.adapter = HistoryListItemAdapter(context = this, listener = View.OnClickListener {
+            startActivity(Intent(this, MoodEditActivity::class.java))
+        })
         binding.recyclerMoods.layoutManager = LinearLayoutManager(this)
     }
 

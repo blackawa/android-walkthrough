@@ -1,5 +1,6 @@
 package jp.blackawa.moodkoro.adapter
 
+import android.content.Context
 import android.databinding.DataBindingUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
@@ -9,20 +10,11 @@ import jp.blackawa.moodkoro.R
 import jp.blackawa.moodkoro.databinding.ListItemHistoryBinding
 import jp.blackawa.moodkoro.domain.Mood
 
-class HistoryListItemAdapter() : RecyclerView.Adapter<HistoryListItemAdapter.VH>() {
-
-    private var moods: List<Mood>
-
-    init {
-        moods = arrayListOf()
-    }
-
-    constructor(moods: List<Mood>) : this() {
-        this.moods = moods
-    }
+class HistoryListItemAdapter(private val context: Context, private var moods: List<Mood> = arrayListOf(), private val listener: View.OnClickListener) : RecyclerView.Adapter<HistoryListItemAdapter.VH>() {
 
     override fun onBindViewHolder(holder: VH?, position: Int) {
         holder?.binding?.mood = moods[position]
+        holder?.itemView?.setOnClickListener(listener)
     }
 
     override fun getItemCount(): Int = moods.size

@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MoodActivity"></activity>
+        <activity android:name=".MoodActivity" />
+        <activity android:name=".MoodEditActivity"></activity>
     </application>
 
 </manifest>
