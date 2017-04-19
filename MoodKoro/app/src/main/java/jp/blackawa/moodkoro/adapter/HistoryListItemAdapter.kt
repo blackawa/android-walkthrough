@@ -10,17 +10,21 @@ import jp.blackawa.moodkoro.R
 import jp.blackawa.moodkoro.databinding.ListItemHistoryBinding
 import jp.blackawa.moodkoro.domain.Mood
 
-class HistoryListItemAdapter(private val context: Context, private var moods: List<Mood> = arrayListOf(), private val listener: View.OnClickListener) : RecyclerView.Adapter<HistoryListItemAdapter.VH>() {
+class HistoryListItemAdapter(
+        private val context: Context,
+        private var moods: List<Mood> = arrayListOf<Mood>(),
+        private val listener: View.OnClickListener
+) : RecyclerView.Adapter<HistoryListItemAdapter.VH>() {
 
-    override fun onBindViewHolder(holder: VH?, position: Int) {
-        holder?.binding?.mood = moods[position]
-        holder?.itemView?.setOnClickListener(listener)
+    override fun onBindViewHolder(holder: VH, position: Int) {
+        holder.binding.mood = moods[position]
+        holder.itemView.setOnClickListener(listener)
     }
 
     override fun getItemCount(): Int = moods.size
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): VH {
-        val context = parent?.context
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+        val context = parent.context
         val inflater = LayoutInflater.from(context)
         return VH(inflater.inflate(R.layout.list_item_history, parent, false))
     }
