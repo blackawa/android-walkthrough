@@ -13,15 +13,15 @@ import rx.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
 
-    private val mPostRecyclerView: RecyclerView = findViewById(R.id.rv_posts) as RecyclerView
+    private lateinit var mPostRecyclerView: RecyclerView
     private var mAdapter: PostAdapter = PostAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        mPostRecyclerView = findViewById(R.id.rv_posts) as RecyclerView
         mPostRecyclerView.layoutManager = LinearLayoutManager(this)
-
         mPostRecyclerView.adapter = mAdapter
 
         fetchQiitaItems()
