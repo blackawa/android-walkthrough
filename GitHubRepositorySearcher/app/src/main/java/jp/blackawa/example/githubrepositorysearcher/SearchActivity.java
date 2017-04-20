@@ -18,6 +18,11 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_search);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
         binding.setViewModel(new ViewModel(this));
     }
