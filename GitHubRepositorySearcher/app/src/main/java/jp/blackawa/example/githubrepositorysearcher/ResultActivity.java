@@ -7,14 +7,18 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import jp.blackawa.example.githubrepositorysearcher.databinding.ActivityResultBinding;
 import jp.blackawa.example.githubrepositorysearcher.domain.SourceCodeRepository;
 import jp.blackawa.example.githubrepositorysearcher.service.GitHubService;
 
 public class ResultActivity extends AppCompatActivity {
 
-    private ActivityResultBinding binding;
+    @Inject
     private GitHubService gitHubService;
+
+    private ActivityResultBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +29,11 @@ public class ResultActivity extends AppCompatActivity {
         String query = getIntent().getExtras().get("query").toString();
         binding.setViewModel(new ViewModel(query));
 
-        gitHubService = new GitHubService();
         List<SourceCodeRepository> repositories = gitHubService.searchRepositories(query);
         binding.recyclerSearchResult.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerSearchResult.setAdapter(new SearchResultAdapter(repositories));
+
+        ((App) getApplication()).getAppComponent().inject(this);
     }
 
     public class ViewModel {
