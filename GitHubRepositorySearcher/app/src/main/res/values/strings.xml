@@ -2,5 +2,5 @@
     <string name="app_name">GitHubRepositorySearcher</string>
     <string name="search_github_repository">Search GitHub Repository</string>
     <string name="search">Search</string>
-    <string name="search_result">Search Result</string>
+    <string name="search_result_for">Search Result for</string>
 </resources>
