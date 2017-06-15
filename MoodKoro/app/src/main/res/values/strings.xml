@@ -4,4 +4,6 @@
     <string name="placeholder_solution">solution</string>
     <string name="placeholder_save">save</string>
     <string name="menu_item_cancel">CancelL</string>
+    <string name="placeholder_update">update</string>
+    <string name="placeholder_delete">delete</string>
 </resources>

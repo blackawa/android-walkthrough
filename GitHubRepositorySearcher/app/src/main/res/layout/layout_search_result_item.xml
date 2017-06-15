@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="jp.blackawa.example.githubrepositorysearcher.SearchResultAdapter.ViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/owner_avatar"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="owner_avatar"
+            tools:src="" />
+
+        <TextView
+            android:id="@+id/repository_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/owner_avatar"
+            android:paddingLeft="20dp"
+            android:text="@{viewModel.repositoryName}"
+            android:textSize="14sp"
+            tools:text="micropress" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/repository_name"
+            android:layout_toRightOf="@+id/owner_avatar"
+            android:paddingLeft="20dp"
+            android:paddingTop="5dp"
+            android:text="@{viewModel.ownerName}"
+            tools:text="blackawa" />
+
+        <!--
+            Stars
+        -->
+
+    </RelativeLayout>
+</layout>
