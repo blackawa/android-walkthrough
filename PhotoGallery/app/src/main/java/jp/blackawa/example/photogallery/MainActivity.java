@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.LinearSnapHelper;
+import android.support.v7.widget.PagerSnapHelper;
 
 import jp.blackawa.example.photogallery.databinding.ActivityMainBinding;
 
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         binding.pager.setAdapter(new SlidePagerAdapter(getSupportFragmentManager()));
         binding.recycler.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         binding.recycler.setAdapter(new GalleryRecyclerViewAdapter());
+        new LinearSnapHelper().attachToRecyclerView(binding.recycler);
     }
 
     @Override

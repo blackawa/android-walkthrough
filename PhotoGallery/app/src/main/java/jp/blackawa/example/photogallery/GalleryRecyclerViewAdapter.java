@@ -18,12 +18,12 @@ public class GalleryRecyclerViewAdapter extends RecyclerView.Adapter<GalleryRecy
 
     @Override
     public void onBindViewHolder(VH holder, int position) {
-        holder.binding.textIndex.setText(position);
+        holder.binding.textIndex.setText(String.valueOf(position));
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        return 100;
     }
 
     public static class VH extends RecyclerView.ViewHolder {
