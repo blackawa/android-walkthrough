@@ -35,16 +35,4 @@ public class GalleryRecyclerViewAdapter extends RecyclerView.Adapter<GalleryRecy
             binding = DataBindingUtil.bind(itemView);
         }
     }
-
-    public static class VM {
-        private String desc;
-
-        public VM(String desc) {
-            this.desc = desc;
-        }
-
-        public String getDesc() {
-            return desc;
-        }
-    }
 }
