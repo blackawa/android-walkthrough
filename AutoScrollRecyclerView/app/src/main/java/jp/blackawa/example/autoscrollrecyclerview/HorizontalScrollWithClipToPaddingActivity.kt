@@ -11,8 +11,9 @@ class HorizontalScrollWithClipToPaddingActivity : BaseScrollActivity() {
         LinearSnapHelper().attachToRecyclerView(recyclerView)
 
         recyclerView.clipToPadding = false
+        recyclerView.clipChildren = false
         // 横にpaddingを追加してclipToPaddingでリストと一緒にスクロールさせる.
-        recyclerView.setPadding(100, 0, 100, 0)
+        recyclerView.setPadding(200, 0, 200, 0)
     }
 
     override fun scrollToPrevious(recyclerView: RecyclerView) {
