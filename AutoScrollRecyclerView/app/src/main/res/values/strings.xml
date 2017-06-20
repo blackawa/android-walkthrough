@@ -2,6 +2,7 @@
     <string name="app_name">AutoScrollRecyclerView</string>
     <string name="go_previous">Go previous</string>
     <string name="go_next">Go Next</string>
-    <string name="menu_vertical">VERTICAL</string>
-    <string name="menu_horizontal">HORIZONTAL</string>
+    <string name="menu_vertical">Vertical</string>
+    <string name="menu_horizontal">Horizontal</string>
+    <string name="menu_horizontal_with_clip_to_padding">Horizontal with clip to padding</string>
 </resources>

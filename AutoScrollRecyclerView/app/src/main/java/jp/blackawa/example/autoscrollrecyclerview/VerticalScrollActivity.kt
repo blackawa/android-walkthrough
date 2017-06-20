@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 class VerticalScrollActivity : BaseScrollActivity() {
     override fun getLayoutManager(): LinearLayoutManager = LinearLayoutManager(this)
 
-    override fun setSnapHelper(recyclerView: RecyclerView) {
+    override fun initRecyclerViewExtra(recyclerView: RecyclerView) {
         LinearSnapHelper().attachToRecyclerView(recyclerView)
     }
 

@@ -15,7 +15,7 @@ abstract class BaseScrollActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBaseScrollBinding
 
     abstract fun getLayoutManager(): LinearLayoutManager
-    abstract fun setSnapHelper(recyclerView: RecyclerView): Unit
+    abstract fun initRecyclerViewExtra(recyclerView: RecyclerView): Unit
     abstract fun scrollToPrevious(recyclerView: RecyclerView): Unit
     abstract fun scrollToNext(recyclerView: RecyclerView): Unit
 
@@ -41,6 +41,9 @@ abstract class BaseScrollActivity : AppCompatActivity() {
             R.id.menu_horizontal -> {
                 startActivity(Intent(this, HorizontalScrollActivity::class.java))
             }
+            R.id.menu_horizontal_with_clip_to_padding -> {
+                startActivity(Intent(this, HorizontalScrollWithClipToPaddingActivity::class.java))
+            }
             else -> {
             }
         }
@@ -50,7 +53,7 @@ abstract class BaseScrollActivity : AppCompatActivity() {
     private fun initRecyclerView() {
         binding.recycler.adapter = MyAdapter((0..999).map { it.toString() })
         binding.recycler.layoutManager = getLayoutManager()
-        setSnapHelper(binding.recycler)
+        initRecyclerViewExtra(binding.recycler)
     }
 
     private fun initButtons() {
