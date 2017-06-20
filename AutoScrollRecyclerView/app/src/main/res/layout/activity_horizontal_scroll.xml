@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="jp.blackawa.example.autoscrollrecyclerview.MainActivity">
+        tools:context="jp.blackawa.example.autoscrollrecyclerview.HorizontalScrollActivity">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
@@ -36,5 +36,4 @@
         </LinearLayout>
 
     </LinearLayout>
-
 </layout>
