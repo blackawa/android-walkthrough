@@ -11,7 +11,7 @@ class MyAdapter(
         private val items: List<String>
 ) : RecyclerView.Adapter<MyAdapter.VH>() {
     private var vms: List<VM> = buildVMList()
-    private var selectedItemIndex: Int = 0
+    var selectedItemIndex: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, i: Int): VH {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.recycler_item, parent, false)
@@ -24,7 +24,7 @@ class MyAdapter(
 
     override fun getItemCount() = items.size
 
-    internal fun incrementSelectedItem() {
+    fun incrementSelectedItem() {
         val beforeIndex = selectedItemIndex
         selectedItemIndex++
         vms = buildVMList()
@@ -32,7 +32,7 @@ class MyAdapter(
         notifyItemChanged(selectedItemIndex)
     }
 
-    internal fun decrementSelectedItem() {
+    fun decrementSelectedItem() {
         val beforeIndex = selectedItemIndex
         selectedItemIndex--
         vms = buildVMList()

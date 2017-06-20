@@ -28,7 +28,26 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initButtons() {
-        binding.buttonNext.setOnClickListener { (binding.recycler.adapter as MyAdapter).incrementSelectedItem() }
-        binding.buttonPrevious.setOnClickListener { (binding.recycler.adapter as MyAdapter).decrementSelectedItem() }
+        binding.buttonNext.setOnClickListener {
+            (binding.recycler.adapter as MyAdapter).incrementSelectedItem()
+            scrollRecyclerViewIfNeeded()
+        }
+        binding.buttonPrevious.setOnClickListener {
+            (binding.recycler.adapter as MyAdapter).decrementSelectedItem()
+            scrollRecyclerViewIfNeeded()
+        }
+    }
+
+    private fun scrollRecyclerViewIfNeeded() {
+        val layoutManager = binding.recycler.layoutManager as LinearLayoutManager
+        val firstVisiblePosition = layoutManager.findFirstCompletelyVisibleItemPosition()
+        val lastVisiblePosition = layoutManager.findLastCompletelyVisibleItemPosition()
+        val selectedItemIndex = (binding.recycler.adapter as MyAdapter).selectedItemIndex
+
+        if (selectedItemIndex < firstVisiblePosition) {
+            binding.recycler.smoothScrollBy(0, -100)
+        } else if (lastVisiblePosition < selectedItemIndex) {
+            binding.recycler.smoothScrollBy(0, 100)
+        }
     }
 }
