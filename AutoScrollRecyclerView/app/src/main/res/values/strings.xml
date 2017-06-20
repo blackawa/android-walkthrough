@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">AutoScrollRecyclerView</string>
+    <string name="go_previous">Go previous</string>
+    <string name="go_next">Go Next</string>
+</resources>
