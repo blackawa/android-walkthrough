@@ -8,11 +8,11 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
-import jp.blackawa.example.autoscrollrecyclerview.databinding.ActivityHorizontalScrollBinding
+import jp.blackawa.example.autoscrollrecyclerview.databinding.ActivityBaseScrollBinding
 
 abstract class BaseScrollActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityHorizontalScrollBinding
+    private lateinit var binding: ActivityBaseScrollBinding
 
     abstract fun getLayoutManager(): LinearLayoutManager
     abstract fun setSnapHelper(recyclerView: RecyclerView): Unit
@@ -21,8 +21,8 @@ abstract class BaseScrollActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_horizontal_scroll)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_horizontal_scroll)
+        setContentView(R.layout.activity_base_scroll)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_base_scroll)
 
         initRecyclerView()
         initButtons()
@@ -36,6 +36,7 @@ abstract class BaseScrollActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.menu_vertical -> {
+                startActivity(Intent(this, VerticalScrollActivity::class.java))
             }
             R.id.menu_horizontal -> {
                 startActivity(Intent(this, HorizontalScrollActivity::class.java))
